@@ -37,33 +37,31 @@ var search = function(filter) {
     di.innerText = n;
     di.classList.add("numheading");
     
-    // Hacky early exit
-    var EarlyExit = {};
     try {
-      FF.forEach((f) => {
-        GG.forEach((g) => {
-          AA.forEach((a) => {
-            BB.forEach((b) => {
-              CC.forEach((c) => {
-                DD.forEach((d) => {
-                  EE.forEach((e) => {
+      AA.forEach((a) => {
+        BB.forEach((b) => {
+          CC.forEach((c) => {
+            DD.forEach((d) => {
+              EE.forEach((e) => {
+                FF.forEach((f) => {
+                  GG.forEach((g) => {
                     {
                       var mp = e(g(d(f(a(n), b(n))), c(n)));
-                      if (filter(n, mp)) return;
-                      
-                      var li = document.createElement("li");
-                      li.innerHTML = ["'left", f, g, a, b, c, d, e, mp+"'"].join("' '");
-                      li.classList.add(mp === m ? "found" : "notfound");
-                      ul.appendChild(li);        
+                      if (!filter(n, mp)) {
+                        var li = document.createElement("li");
+                        li.innerHTML = ["'left", f, g, a, b, c, d, e, mp+"'"].join("' '");
+                        li.classList.add(mp === m ? "found" : "notfound");
+                        ul.appendChild(li); 
+                      }     
                     };
                     {
                       var mp = e(g(a(n), d(f(b(n), c(n)))));
-                      if (filter(n, mp)) return;
-                      
-                      var li = document.createElement("li");
-                      li.innerHTML = ["left", f, g, a, b, c, d, e, mp].join("' '");
-                      li.classList.add(mp === m ? "found" : "notfound");
-                      ul.appendChild(li);        
+                      if (!filter(n, mp)) {
+                        var li = document.createElement("li");
+                        li.innerHTML = ["left", f, g, a, b, c, d, e, mp].join("' '");
+                        li.classList.add(mp === m ? "found" : "notfound");
+                        ul.appendChild(li);
+                      }
                     }
                   });
                 });
@@ -73,18 +71,9 @@ var search = function(filter) {
         });
       });
     } catch (e) {
-      if (e !== EarlyExit) throw e;
+      // lol early exit staregy
     }
   });
-}
-
-var join = function(g0, g1) {
-  var f0 = g0();
-  var f1 = g1();
-  var foo = function(n, mp) {
-    return fo(n, mp) && f1(n, mp);
-  }
-  return foo;
 }
 
 var earlyExit = function() {
@@ -93,21 +82,22 @@ var earlyExit = function() {
     found[n] = false;
   });
   var foo = function(n, mp) {
+    console.log(n, mp, found[n]);
     if (found[n]) {
-      return true;
-    } else if (mp === m) {
-      found[n] = true;
-      return false;
+      throw undefined;
     } else {
+      if (mp === m) {
+        found[n] = true;
+      }
       return false;
     }
   }
   return foo;
 }
 
-var onlym = function() {
+var onlyM = function() {
   var foo = function(n, mp) {
-    return mp === m;
+    return mp !== m;
   }
   return foo;
 }
