@@ -13,30 +13,44 @@ var binops = [add, sub, mul, div];
 // var neg = (x) => (-x);
 // var sqrt = (x) => Math.sqrt(1);
 
-var appendOutput = function(text) {
+var appendOutput = function(text, cssClass) {
   var li = document.createElement("li");
-  li.innerText = text;
   output.appendChild(li);
+  
+  li.innerText = text;
+  // always monospace for now, maybe this should be an option
+  li.classList.add("monospace");
+  if (cssClass !== undefined) {
+    li.classList.add(cssClass);
+  }
+  
+  return li;
 }
 
 var search = function() {
   range.forEach(
     function(i) {
+      appendOutput(i + ":", "bold");
       binops.forEach(
         function(f) {
           binops.forEach(
             function(g) {
               var m = g(f(i, i), i); // avoids eval and cleaner
-              if (m == 6) {
-                appendOutput(["("+i, f, i+")", g, i, "=", m].join(" "));  
-              } else {
-                appendOutput(["("+i, f, i+")", g, i, "=", m].join(" ")); 
-              }
+              var li = appendOutput(["("+i, f, i+")", g, i, "=", m].join(" "), m === 6 ? "highlight" : undefined);
             }
           );
         }
       );
-      
+    }
+  );
+}
+
+var filter = function() {
+  Array.from(output.children).forEach(
+    function filterClass(li) {
+      if (!(li.classList.contains("highlight") || li.classList.contains("bold"))) {
+        output.removeChild(li);
+      }
     }
   );
 }
