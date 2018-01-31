@@ -3,14 +3,14 @@ Figuring out the =6 problem through brute force and javascript
 
 ## Problem
 
-2 2 2 = 6
-3 3 3 = 6
-4 4 4 = 6
-5 5 5 = 6
-6 6 6 = 6
-7 7 7 = 6
-8 8 8 = 6
-9 9 9 = 6
+2 2 2 = 6  
+3 3 3 = 6  
+4 4 4 = 6  
+5 5 5 = 6  
+6 6 6 = 6  
+7 7 7 = 6  
+8 8 8 = 6  
+9 9 9 = 6  
 
 You may only add functions, not new numbers. 
 Hint: use the square root.
