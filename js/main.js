@@ -13,59 +13,33 @@ var binops = [add, sub, mul, div];
 // var neg = (x) => (-x);
 // var sqrt = (x) => Math.sqrt(1);
 
-// return a monospaced list element
-var monoli = function(text) {
-  var li = document.createElement("li");
-  li.classList.add("monospace");
-  li.innerText = text;
-  return li;
-}
-
-var monoliul = function(text) {
-  var li = monoli(text);
-  var ul = document.createElement("ul");
-  li.appendChild(ul);
-  return [li, ul];
-}
-
-var bold = function(htmlelem) {
-  htmlelem.classList.add("bold");
-  return htmlelem;
-}
-
-var normal = function(htmlelem) {
-  htmlelem.classList.add("normal");
-  return htmlelem;
-}
-
-var highlight = function(htmlelem) {
-  htmlelem.classList.add("highlight");
-  return htmlelem;
-}
-
+// calculates and appends the result to output
 var search = function() {
   range.forEach(
-    function(i) {
-      // add new ul for i
-      var liul = monoliul(i);
-      bold(liul[0]);
-      // add it to the ouput
-      output.appendChild(liul[0]);
-      // change head to child
-      var head = liul[1];
+    (i) => {
+      var li = document.createElement("li");
+      var di = document.createElement("div");
+      var ul = document.createElement("ul");
+      output.appendChild(li);
+        li.appendChild(di);
+        li.appendChild(ul);
+      
+      di.innerText = i;
+      di.classList.add("numheading");
       
       binops.forEach(
-        function(f) {
+        (f) => {
           binops.forEach(
-            function(g) {
+            (g) => {
               var m = g(f(i, i), i); // avoids eval and cleaner
-              var li = monoli(["("+i, f, i+")", g, i, "=", m].join(" "));
-              if (m === 6) {
-                bold(highlight(li));
-              } else {
-                normal(li);
-              }
-              head.appendChild(li);              
+              var li = document.createElement("li");
+              var di = document.createElement("div");
+              li.appendChild(di);
+              
+              di.innerText = ["("+i, f, i+")", g, i, "=", m].join(" ");
+              di.classList.add(m === 6 ? "found" : "notfound");
+              
+              ul.appendChild(li);              
             }
           );
         }
@@ -74,7 +48,8 @@ var search = function() {
   );
 }
 
-var filter = function() {
+// recursivly filter a htmlelem removing 
+var filterClassList = function(htmlelem, classList) {
   Array.from(output.children).forEach(
     function filterClass(li) {
       if (!(li.classList.contains("highlight") || li.classList.contains("bold"))) {

@@ -2,14 +2,15 @@
     font-family: monospace;
 }
 
-.highlight {
-  color: red;
-}
-
-.bold {
+.numheading {
   font-weight: bold;
 }
 
-.normal {
+.found {
+  color: red;
+  font-weight: bold;
+}
+
+.notfound {
   font-weight: normal;
 }
