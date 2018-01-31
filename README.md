@@ -30,30 +30,78 @@ Find:
 `b :: ZZ -> ZZ`  
 `c :: ZZ -> ZZ`  
 `d :: ZZ -> ZZ`  
+`e :: ZZ -> ZZ` 
 
 Such that:
 
-`d(g(f(a(n), b(n)), c(n))) = m`
+```
+e(g(d(f(a(n), b(n))), c(n)))  
+=  
+e(g(
+  d(f(a(n), b(n))), 
+  c(n)
+)) 
+= 
+m
+```
+
+or
+
+```
+e(g(a(n)), d(f(b(n), c(n))))  
+=  
+e(g( 
+  a(n),
+  d(f(b(n), c(n)))
+)) 
+= 
+m
+```
+
+### Searching
+
+let:
+
+`f (- FF`  
+`g (- GG`  
+`a (- AA`  
+`b (- BB`  
+`c (- CC`  
+`d (- DD`  
+`e (- EE`  
+
+`FF = GG`  
+`AA = BB = CC = DD`
 
 ### Composition
 
-V- g, d E:
+V- e, g E:
 
 `h :: ZZ -> ZZ -> ZZ`  
-`h = d . g`
+`h = e . g`
 
-`d = id` is valid.
+V- d, f E:
+
+`i :: ZZ -> ZZ -> ZZ`
+`i = d . f` 
 
 ### Commutative
 
-`f`, `g` is commutative =>
+`f`, `g` is commutative 
 
-`d(g(f(a(n), b(n)), c(n))) = m = d(f(g(a(n), b(n)), c(n)))`
+=>
 
-Only `|FF x GG|` combinations needs to be considered.
+`g(f(a(n), b(n)), c(n)) = m = f(g(a(n), b(n)), c(n))`
+
+This property is not the case when adding division, but can be used as an optimisation.
+
+### Commutative Composition
+
+`a + b = a + -b`
+
+This can also be used as an optimisation.
 
 ### Extension
 
 What about other `n (- ZZ`?  
-What about other `m (- ZZ`?  
-What restrictions are there on `FF = GG = {f | f :: ZZ -> ZZ -> ZZ}` will there be?
+What about other `m (- ZZ`?
