@@ -82,7 +82,6 @@ var earlyExit = function() {
     found[n] = false;
   });
   var foo = function(n, mp) {
-    console.log(n, mp, found[n]);
     if (found[n]) {
       throw undefined;
     } else {
