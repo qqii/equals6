@@ -19,17 +19,17 @@ Hint: use the square root.
 
 Given:
 
-`n (- {2..6}`
+`n (- {2..6}`  
 `m = 6`
 
 Find:
 
-`f :: ZZ -> ZZ -> ZZ`
-`g :: ZZ -> ZZ -> ZZ`
-`a :: ZZ -> ZZ`
-`b :: ZZ -> ZZ`
-`c :: ZZ -> ZZ`
-`d :: ZZ -> ZZ`
+`f :: ZZ -> ZZ -> ZZ`  
+`g :: ZZ -> ZZ -> ZZ`  
+`a :: ZZ -> ZZ`  
+`b :: ZZ -> ZZ`  
+`c :: ZZ -> ZZ`  
+`d :: ZZ -> ZZ`  
 
 Such that:
 
@@ -39,7 +39,7 @@ Such that:
 
 V- g, d E:
 
-`h :: ZZ -> ZZ -> ZZ`
+`h :: ZZ -> ZZ -> ZZ`  
 `h = d . g`
 
 `d = id` is valid.
@@ -54,6 +54,6 @@ Only `|FF x GG|` combinations needs to be considered.
 
 ### Extension
 
-What about other `n (- ZZ`?
-What about other `m (- ZZ`?
+What about other `n (- ZZ`?  
+What about other `m (- ZZ`?  
 What restrictions are there on `FF = GG = {f | f :: ZZ -> ZZ -> ZZ}` will there be?
