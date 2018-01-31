@@ -37,7 +37,7 @@ var search = function() {
               li.innerText = ["("+i, f, i+")", g, i, "=", m].join(" ");
               li.classList.add(m === 6 ? "found" : "notfound");
               
-              ul.appendChild(li);              
+              ul.appendChild(li);
             }
           );
         }
