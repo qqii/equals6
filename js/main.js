@@ -13,30 +13,59 @@ var binops = [add, sub, mul, div];
 // var neg = (x) => (-x);
 // var sqrt = (x) => Math.sqrt(1);
 
-var appendOutput = function(text, cssClass) {
+// return a monospaced list element
+var monoli = function(text) {
   var li = document.createElement("li");
-  output.appendChild(li);
-  
-  li.innerText = text;
-  // always monospace for now, maybe this should be an option
   li.classList.add("monospace");
-  if (cssClass !== undefined) {
-    li.classList.add(cssClass);
-  }
-  
+  li.innerText = text;
   return li;
+}
+
+var monoliul = function(text) {
+  var li = monoli(text);
+  var ul = document.createElement("ul");
+  li.appendChild(ul);
+  return [li, ul];
+}
+
+var bold = function(htmlelem) {
+  htmlelem.classList.add("bold");
+  return htmlelem;
+}
+
+var normal = function(htmlelem) {
+  htmlelem.classList.add("normal");
+  return htmlelem;
+}
+
+var highlight = function(htmlelem) {
+  htmlelem.classList.add("highlight");
+  return htmlelem;
 }
 
 var search = function() {
   range.forEach(
     function(i) {
-      appendOutput(i + ":", "bold");
+      // add new ul for i
+      var liul = monoliul(i);
+      bold(liul[0]);
+      // add it to the ouput
+      output.appendChild(liul[0]);
+      // change head to child
+      var head = liul[1];
+      
       binops.forEach(
         function(f) {
           binops.forEach(
             function(g) {
               var m = g(f(i, i), i); // avoids eval and cleaner
-              var li = appendOutput(["("+i, f, i+")", g, i, "=", m].join(" "), m === 6 ? "highlight" : undefined);
+              var li = monoli(["("+i, f, i+")", g, i, "=", m].join(" "));
+              if (m === 6) {
+                bold(highlight(li));
+              } else {
+                normal(li);
+              }
+              head.appendChild(li);              
             }
           );
         }
