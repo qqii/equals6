@@ -33,11 +33,9 @@ var search = function() {
             (g) => {
               var m = g(f(i, i), i); // avoids eval and cleaner
               var li = document.createElement("li");
-              var di = document.createElement("div");
-              li.appendChild(di);
               
-              di.innerText = ["("+i, f, i+")", g, i, "=", m].join(" ");
-              di.classList.add(m === 6 ? "found" : "notfound");
+              li.innerText = ["("+i, f, i+")", g, i, "=", m].join(" ");
+              li.classList.add(m === 6 ? "found" : "notfound");
               
               ul.appendChild(li);              
             }
@@ -49,12 +47,12 @@ var search = function() {
 }
 
 // recursivly filter a htmlelem removing 
-var filterClassList = function(htmlelem, classList) {
-  Array.from(output.children).forEach(
-    function filterClass(li) {
-      if (!(li.classList.contains("highlight") || li.classList.contains("bold"))) {
-        output.removeChild(li);
-      }
+var filterClass = function(className) {
+  Array.from(
+    document.getElementsByClassName(className)
+  ).forEach(
+    (e) => {
+      e.parentElement.removeChild(e);
     }
   );
 }
