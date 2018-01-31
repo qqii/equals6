@@ -1,21 +1,26 @@
 "use strict"
 var output;
-// original question
-var range = [2, 3, 4, 5, 6, 7, 8, 9];
+// original question: d(g(f(a(n), b(n)), c(n))) = m (see readme)
+var NN = [2, 3, 4, 5, 6, 7, 8, 9];
+var m = 6;
 // Basic binary operatons
 var add = (x, y) => x + y; add.toString = () => "+";
 var sub = (x, y) => x - y; sub.toString = () => "-";
 var mul = (x, y) => x * y; mul.toString = () => "*";
 var div = (x, y) => x / y; div.toString = () => "/";
-var binops = [add, sub, mul, div];
-// // Basic unary opeartions
-// var id = (x) => x;
-// var neg = (x) => (-x);
+var FF = [add, sub, mul, div];
+var GG = FF;
+// Unary operations
+var neg = (x) => -x; neg.toString = () => "-"; // useless as an iunop 
 // var sqrt = (x) => Math.sqrt(1);
+var AA = [];
+var BB = [];
+var CC = [];
+var DD = [];
 
 // calculates and appends the result to output
 var search = function() {
-  range.forEach(
+  NN.forEach(
     (i) => {
       var li = document.createElement("li");
       var di = document.createElement("div");
@@ -27,15 +32,15 @@ var search = function() {
       di.innerText = i;
       di.classList.add("numheading");
       
-      binops.forEach(
+      FF.forEach(
         (f) => {
-          binops.forEach(
+          GG.forEach(
             (g) => {
-              var m = g(f(i, i), i); // avoids eval and cleaner
+              var result = g(f(i, i), i); // avoids eval and cleaner
               var li = document.createElement("li");
               
-              li.innerText = ["("+i, f, i+")", g, i, "=", m].join(" ");
-              li.classList.add(m === 6 ? "found" : "notfound");
+              li.innerText = ["("+i, f, i+")", g, i, "=", result].join(" ");
+              li.classList.add(result === m ? "found" : "notfound");
               
               ul.appendChild(li);
             }
