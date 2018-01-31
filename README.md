@@ -1,4 +1,4 @@
-# equals6
+# [equals6](https://qqii.github.io/equals6/)
 Figuring out the =6 problem through brute force and javascript
 
 ## Problem
