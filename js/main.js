@@ -4,17 +4,17 @@ var output;
 var NN = [2, 3, 4, 5, 6, 7, 8, 9];
 var m = 6;
 // Vinary operatons
-var add = (x, y) => x + y; add.toString = () => "+";
-var sub = (x, y) => x - y; sub.toString = () => "-";
-var mul = (x, y) => x * y; mul.toString = () => "*";
-var div = (x, y) => x / y; div.toString = () => "/";
+var add = (x, y) => x + y; add.s = (x, y) => "("+x+"+"+y+")";
+var sub = (x, y) => x - y; sub.s = (x, y) => "("+x+"-"+y+")";
+var mul = (x, y) => x * y; mul.s = (x, y) => "("+x+"*"+y+")";
+var div = (x, y) => x / y; div.s = (x, y) => "("+x+"/"+y+")";
 var bop = [add, sub, mul, div];
 var FF = bop;
 var GG = bop;;
 // Unary operations
-var id  = (x) => x; id.toString = () => "";
-var neg = (x) => -x; neg.toString = () => "-";
-var sqrt = (x) => Math.sqrt(x); sqrt.toString = () => "&#8730;"; // sqrt
+var id  = (x) => x; id.s = (x) => x;
+var neg = (x) => -x; neg.s = (x) => "-"+x;
+var sqrt = (x) => Math.sqrt(x); sqrt.s = (x) => "&#8730;"+x; // sqrt
 var uop = [id, neg, sqrt];
 var AA = uop;
 var BB = uop;
@@ -49,7 +49,7 @@ var search = function(filter) {
                       var mp = e(g(d(f(a(n), b(n))), c(n)));
                       if (!filter(n, mp)) {
                         var li = document.createElement("li");
-                        li.innerHTML = ["'left", f, g, a, b, c, d, e, mp+"'"].join("' '");
+                        li.innerHTML = e.s(g.s(d.s(f.s(a.s(n), b.s(n))), c.s(n)))+"="+mp;
                         li.classList.add(mp === m ? "found" : "notfound");
                         ul.appendChild(li); 
                       }     
@@ -58,7 +58,7 @@ var search = function(filter) {
                       var mp = e(g(a(n), d(f(b(n), c(n)))));
                       if (!filter(n, mp)) {
                         var li = document.createElement("li");
-                        li.innerHTML = ["left", f, g, a, b, c, d, e, mp].join("' '");
+                        li.innerHTML = e.s(g.s(a.s(n), d.s(f.s(b.s(n), c.s(n)))))+"="+mp;
                         li.classList.add(mp === m ? "found" : "notfound");
                         ul.appendChild(li);
                       }
